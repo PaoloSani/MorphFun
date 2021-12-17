@@ -1,0 +1,70 @@
+LICENSE SUMMARY
+• Allows personal use
+• Allows PDF embedding and web embedding
+• Allows conversion to web formats
+• Prohibits commercial use
+• Prohibits application embedding and e-book embedding
+
+To purchase a commercial use license, contact info@philatype.com
+
+PHILATYPE NON-COMMERCIAL END USER LICENSE AGREEMENT
+This Personal Usage License Agreement (the “Agreement”) becomes
+a binding contract between you and Philatype when you install the
+Font Software (the “Font”). If you do not wish to be bound by the
+Agreement, you cannot access, use or install the Font. 
+
+You hereby agree to the following:
+
+1. Binding Agreement.
+You are bound by the Agreement and you acknowledge that all use of 
+the Font is governed by the Agreement.
+
+2. License Grant.
+Philatype hereby grants you the non-exclusive, non-assignable, 
+non-sublicensable, and right to use the Font for personal 
+non-profit purposes.
+
+3. Allowed Uses
+You may use the licensed fonts to create images on any 
+non-commercial products and materials such as computer screens, 
+paper, web pages, photographs, printed material, T-shirts, and
+other surfaces. 
+
+You may embed the font in PDFs and websites.
+
+You may convert the font as necessary for web embedding.
+
+4. Restrictions
+You may not use the Font for commercial purposes. This includes 
+using the Font for income-generating use of any kind, whether
+direct or indirect. 
+
+You may not embed the Font into any software application,
+including native mobile applications for systems such as iOS, 
+Android, Windows Phone, or eBooks.
+
+5. Intellectual and Industrial Property Rights.
+You agree that the Font is protected by the copyright law and 
+other intellectual and industrial property rights of the United
+States and its various States, by the copyright law and other 
+intellectual and industrial property rights of other nations, 
+and by international treaties. You agree to treat the Font as 
+you would any other copyrighted material.
+
+You agree that Philatype owns all right, title and interest in
+and to the Font, its structure, organization, code, and related
+files, including all intellectual and industrial property rights
+therein such as copyright, design and trademarks rights. You
+agree that the Font, its structure, organization, code, and
+related files are valuable property of Philatype and that any
+intentional or negligent use of the Font not expressly permitted
+by the Agreement constitutes an infringement of intellectual and
+industrial property rights.
+
+6. Termination.
+Upon failure by you to comply with the terms of this Agreement,
+Philatype shall be entitled to terminate this Agreement upon 
+notice by regular mail or email. The termination of the Agreement 
+shall not preclude Philatype from suing you for damages of any 
+breach of the Agreement. The Agreement may only be modified in 
+writing signed by an authorized officer of Philatype.
