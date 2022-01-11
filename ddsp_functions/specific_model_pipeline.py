@@ -4,7 +4,7 @@ import gin
 import time
 import ddsp
 
-from model_conditioning import model_conditioning
+from ddsp_functions.model_conditioning import model_conditioning
 
 
 def specific_model_pipeline(model_paths, audio, audio_features):

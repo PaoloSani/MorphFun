@@ -1,10 +1,9 @@
 import warnings
-from common_pipeline import common_pipeline
-from specific_model_pipeline import specific_model_pipeline
-from resynthesize import resynthesize
+from ddsp_functions.common_pipeline import common_pipeline
+from ddsp_functions.specific_model_pipeline import specific_model_pipeline
+from ddsp_functions.resynthesize import resynthesize
 from initial_path_setup import get_useful_model_paths
 warnings.filterwarnings("ignore")
-from scipy.io.wavfile import write
 import numpy as np
 import os
 import librosa
