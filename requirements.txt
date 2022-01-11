@@ -1,0 +1,4 @@
+ddsp
+sounddevice
+tensorflow
+gin
