@@ -5,16 +5,19 @@ from ddsp_functions.resynthesize import resynthesize
 from initial_path_setup import get_useful_model_paths
 warnings.filterwarnings("ignore")
 import numpy as np
-import os
 import librosa
-import soundfile
+import time
+from multiprocessing import Process
 
 sr = 16000
 target_sr = 44100
 
 
+
 def transform_audio(audio):
-    audio = np.swapaxes(audio, 0, 1)
+    audio = librosa.resample(audio.ravel(), orig_sr=44100, target_sr=16000, res_type='kaiser_best')
+    audio = audio.reshape((1,  np.shape(audio)[0]))
+    start_process_time = time.time()
     model_names = ['Violin', 'Flute', 'Trumpet', 'Tenor_Saxophone']
 
     #getting all the useful paths for the models 
@@ -25,14 +28,22 @@ def transform_audio(audio):
 
     new_audios = []
 
-    #For each model i generate the predicted audio
+
+    
+    
     for model_name in model_names:
-        #specific moodel pipeline
         model, audio_features = specific_model_pipeline(models_paths[model_name], audio, audio_features)
         new_audio = resynthesize(audio_features, model)
         new_audio = librosa.resample(new_audio, sr, target_sr, res_type='kaiser_best')
-        soundfile.write(os.path.join(os.getcwd(), 'generated_wav',f"{model_name}.wav"), new_audio, target_sr, subtype='PCM_16')
         new_audios.append(np.asarray(new_audio))
+        
+        
+    
+
+        
+
+    
+    print('Total time:  %.1f seconds' % (time.time() - start_process_time))
         
 
     return new_audios

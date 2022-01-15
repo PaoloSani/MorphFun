@@ -39,6 +39,7 @@ void sendRec(boolean recToggle){
     }
     
   
+
   
 void mousePressed(){              //user interaction
   int instrument = 0;
@@ -51,13 +52,13 @@ void mousePressed(){              //user interaction
   }
   if(rec==false){
     if(mouseX<width/2 & mouseY<height/2 & mouseY>height/6){
-      instrument = 1;   //flute
-      message = "Selected instrument: flute";
+      instrument = 2;   //violin
+      message = "Selected instrument: violin";
       sendClass(instrument);
     }
     if(mouseX>width/2 & mouseY<height/2 & mouseY>height/6){
-      instrument = 2;    //violin
-      message = "Selected instrument: violin";
+      instrument = 1;    //flute
+      message = "Selected instrument: flute";
       sendClass(instrument);
     }
     if(mouseX<width/2 & mouseY>height/2 & mouseY< 3*height/4){

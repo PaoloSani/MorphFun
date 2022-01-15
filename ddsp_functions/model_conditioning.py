@@ -17,7 +17,7 @@ def model_conditioning(audio_features,  STATISTICS):
     quiet = 20  # @param {type:"slider", min: 0, max:60, step:1}
 
     #@markdown Force pitch to nearest note (amount)
-    autotune = 0.2 # @param {type:"slider", min: 0.0, max:1.0, step:0.1}
+    autotune = 0.0 # @param {type:"slider", min: 0.0, max:1.0, step:0.1}
 
     #@markdown ## Manual
 
