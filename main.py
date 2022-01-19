@@ -1,31 +1,46 @@
 import asyncio
-from ddsp_functions.transform_audio import transform_audio
-from audio_utilities.convert_to_mixer_sounds import convert_to_mixer_sounds
-from audio_utilities.play_sd_audio import play_sd_audio
-import pygame
-import pygame.mixer
-import OSC_utilities.initialize_server as initialize_server
+from multiprocessing.dummy import connection
 from OSC_utilities.get_socket import get_socket
-from audio_utilities.handle_record import handle_record
-from audio_utilities.start_morphing import start_morphing
+from audio_routine import AudioProcessingTask as ap
+
+import OSC_utilities.initialize_server as initialize_server
+
+from pynput import keyboard
+
+global connectionIsActive
+connectionIsActive = False
 
 
-    
+def on_press(key):
+    if key == keyboard.Key.esc:
+        global connectionIsActive
+        connectionIsActive = False
+        return False  # stop listener
+    try:
+        k = key.char  # single-char keys
+    except:
+        k = key.name  # other keys
+
 
 async def main():
 
     transport = await initialize_server.initialize_server() 
+    global connectionIsActive
+    connectionIsActive = True
     sock = get_socket(transport)
-    print("Ready to Record")
-    recorded_audio = handle_record(max_duration=14, socket=sock)
-    play_sd_audio(recorded_audio)
-    new_audios = transform_audio(recorded_audio)
-    pygame.mixer.init(frequency=22050, size=32) #Initializing pygame.mixer for routing and syncing audio
-    sounds = convert_to_mixer_sounds(new_audios, pygame.mixer) #convert our audios into pygame Sound objects
-    start_morphing(sounds, loops= 20, socket = sock)
+    audio_process = ap(sock)
+
+    print("\nEnter 'Esc' to close the connection at any time\n")
+    listener = keyboard.Listener(on_press=on_press)
+    listener.start()
+    while(connectionIsActive):
+        print("\n")
+        print("Ready to record audio!")
+        print("\n")
+
+        audio_process.start()
+        
+    print("\n\nClosing connection\n\n")
     transport.close()
 
-
 asyncio.run(main())
-
-
