@@ -10,6 +10,9 @@ from audio_utilities.handle_record import start_recording, stop_recording, handl
 import numpy as np
 
 from audio_utilities.play_sd_audio import play_sd_audio
+from ddsp_functions.transform_audio import transform_audio
+import multiprocessing as mp
+
 
 
 global connectionIsActive
@@ -57,14 +60,17 @@ async def main():
     connectionIsActive = True
     sock = get_socket(transport)
 
-    # audio_process = AudioProcessingTask(sock)
 
     print("\nEnter 'Esc' to close the connection at any time\n")
+
     exitListener = keyboard.Listener(on_press=on_press)
     exitListener.start()
 
     messageReader = threading.Thread(target=get_OSC_msg_value, args=(sock,), daemon=True)
     messageReader.start()
+
+    pool = mp.Process(target=transform_audio, args=(recorded_audio,))
+
 
     while(connectionIsActive):
         if ( init ):
@@ -77,6 +83,9 @@ async def main():
                 message = queue.get()
                 print("Message received \"{}\"" .format(messages.get(message)))
                 if (message == 0):
+                    if ( pool.is_alive()):
+                        pool.terminate()
+
                     morphingOn = False
                     if ( startRecording ):
                         startRecording = False
@@ -88,6 +97,9 @@ async def main():
                         play_sd_audio(recorded_audio)
                         morphingOn = True
                         print("\n!!! M0RPH!NG B3G!N$ !!!\n")
+
+
+                        pool.start()
 
                 else:
                     if ( morphingOn ):

@@ -13,7 +13,6 @@ sr = 16000
 target_sr = 44100
 
 
-
 def transform_audio(audio):
     audio = librosa.resample(audio.ravel(), orig_sr=44100, target_sr=16000, res_type='kaiser_best')
     audio = audio.reshape((1,  np.shape(audio)[0]))
@@ -27,25 +26,15 @@ def transform_audio(audio):
     audio_features= common_pipeline(audio)
 
     new_audios = []
-
-
-    
-    
+   
     for model_name in model_names:
         model, audio_features = specific_model_pipeline(models_paths[model_name], audio, audio_features)
         new_audio = resynthesize(audio_features, model)
         new_audio = librosa.resample(new_audio, sr, target_sr, res_type='kaiser_best')
         new_audios.append(np.asarray(new_audio))
-        
-        
-    
-
-        
-
-    
+   
     print('Total time:  %.1f seconds' % (time.time() - start_process_time))
-        
-
+ 
     return new_audios
 
 

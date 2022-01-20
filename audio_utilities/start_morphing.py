@@ -1,6 +1,5 @@
 from audio_utilities.start_playing_ import start_playing_
 from audio_utilities.change_instrument import change_instrument
-from OSC_utilities.get_OSC_msg_value import get_OSC_msg_value
 
 
 def start_morphing(sounds, loops, socket):
@@ -10,7 +9,6 @@ def start_morphing(sounds, loops, socket):
 
     i = 0
     while i < 200:
-        OSC_msg_value = get_OSC_msg_value(socket)
         if OSC_msg_value == 0:
             pass
 
