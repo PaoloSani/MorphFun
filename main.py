@@ -1,14 +1,23 @@
 import asyncio
 from multiprocessing.dummy import connection
+from turtle import clear
 from OSC_utilities.get_socket import get_socket
-from audio_routine import AudioProcessingTask as ap
-
 import OSC_utilities.initialize_server as initialize_server
-
+from queue import Queue
+import threading
 from pynput import keyboard
+from audio_utilities.handle_record import start_recording, stop_recording, handle_recorded_audio
+import numpy as np
+
+from audio_utilities.play_sd_audio import play_sd_audio
+
 
 global connectionIsActive
 connectionIsActive = False
+global queue
+queue = Queue()
+RECORDING_SR = 44100
+messages = dict(zip(range(5), ['Toggle Record', 'Violin', 'Flute', 'Trumpet', 'Sax']))
 
 
 def on_press(key):
@@ -21,26 +30,74 @@ def on_press(key):
     except:
         k = key.name  # other keys
 
+def get_OSC_msg_value(sock):
+    global queue
+    while True:
+        try:
+            data, _ = sock.recvfrom(4096)
+            value  = data[-1]
+            queue.put(value)
+        except OSError:
+            break
+        
 
 async def main():
+    global connectionIsActive
+    global queue 
+    init = True
+    global stop_threads
+    max_duration = 14
+    startRecording = True
+    morphingOn = True
+    morphingQueue = Queue()
+    recorded_audio =  np.zeros((RECORDING_SR* max_duration, 1), np.float32)
+    
 
     transport = await initialize_server.initialize_server() 
-    global connectionIsActive
     connectionIsActive = True
     sock = get_socket(transport)
-    audio_process = ap(sock)
+
+    # audio_process = AudioProcessingTask(sock)
 
     print("\nEnter 'Esc' to close the connection at any time\n")
-    listener = keyboard.Listener(on_press=on_press)
-    listener.start()
-    while(connectionIsActive):
-        print("\n")
-        print("Ready to record audio!")
-        print("\n")
+    exitListener = keyboard.Listener(on_press=on_press)
+    exitListener.start()
 
-        audio_process.start()
-        
+    messageReader = threading.Thread(target=get_OSC_msg_value, args=(sock,), daemon=True)
+    messageReader.start()
+
+    while(connectionIsActive):
+        if ( init ):
+            print("\n")
+            print("Ready to record audio!")
+            print("\n")   
+            init = False     
+        else:
+            if ( not queue.empty() ):
+                message = queue.get()
+                print("Message received \"{}\"" .format(messages.get(message)))
+                if (message == 0):
+                    morphingOn = False
+                    if ( startRecording ):
+                        startRecording = False
+                        start_time = start_recording(recorded_audio)
+                    else:
+                        startRecording = True
+                        stop_recording()
+                        recorded_audio = handle_recorded_audio(recorded_audio=recorded_audio, start_time=start_time, max_duration=max_duration)
+                        play_sd_audio(recorded_audio)
+                        morphingOn = True
+                        print("\n!!! M0RPH!NG B3G!N$ !!!\n")
+
+                else:
+                    if ( morphingOn ):
+                        morphingQueue.put(message)
+
+    
     print("\n\nClosing connection\n\n")
+    
     transport.close()
 
 asyncio.run(main())
+
+
