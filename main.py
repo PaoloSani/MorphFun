@@ -6,11 +6,10 @@ import OSC_utilities.initialize_server as initialize_server
 from queue import Queue
 import threading
 from pynput import keyboard
+from audio_routine import audio_function, audio_processing_thread
 from audio_utilities.handle_record import start_recording, stop_recording, handle_recorded_audio
 import numpy as np
-
 from audio_utilities.play_sd_audio import play_sd_audio
-from ddsp_functions.transform_audio import transform_audio
 import multiprocessing as mp
 
 
@@ -63,15 +62,14 @@ async def main():
 
     print("\nEnter 'Esc' to close the connection at any time\n")
 
-    exitListener = keyboard.Listener(on_press=on_press)
+    exitListener = keyboard.Listener(on_press=on_press, daemon=True)
     exitListener.start()
 
     messageReader = threading.Thread(target=get_OSC_msg_value, args=(sock,), daemon=True)
     messageReader.start()
 
-    pool = mp.Process(target=transform_audio, args=(recorded_audio,))
-
-
+    morphing_process = audio_processing_thread(name = 'Audio Thread', target=audio_function, args=(recorded_audio))
+    
     while(connectionIsActive):
         if ( init ):
             print("\n")
@@ -83,8 +81,10 @@ async def main():
                 message = queue.get()
                 print("Message received \"{}\"" .format(messages.get(message)))
                 if (message == 0):
-                    if ( pool.is_alive()):
-                        pool.terminate()
+                    if ( morphing_process.is_alive() ):
+                        morphing_process.raise_exception()
+                        morphing_process.join()
+                        morphing_process = audio_processing_thread(name = 'Audio Thread', target=audio_function, args=(recorded_audio))
 
                     morphingOn = False
                     if ( startRecording ):
@@ -97,17 +97,19 @@ async def main():
                         play_sd_audio(recorded_audio)
                         morphingOn = True
                         print("\n!!! M0RPH!NG B3G!N$ !!!\n")
-
-
-                        pool.start()
+                        morphing_process.start()   
 
                 else:
                     if ( morphingOn ):
                         morphingQueue.put(message)
+                        # start_morphing(sounds, loops= 20)
 
     
     print("\n\nClosing connection\n\n")
-    
+    if ( morphing_process.is_alive() ):
+        morphing_process.raise_exception()
+        morphing_process.join()
+
     transport.close()
 
 asyncio.run(main())

@@ -2,7 +2,7 @@ from audio_utilities.start_playing_ import start_playing_
 from audio_utilities.change_instrument import change_instrument
 
 
-def start_morphing(sounds, loops, socket):
+def start_morphing(sounds, loops):
     start_playing_(sounds, loops=loops)
 
     sound_idx_to_mute = 0

@@ -8,10 +8,12 @@ import numpy as np
 import librosa
 import time
 from multiprocessing import Process
+import numpy as np
+import codecs, json 
+
 
 sr = 16000
 target_sr = 44100
-
 
 def transform_audio(audio):
     audio = librosa.resample(audio.ravel(), orig_sr=44100, target_sr=16000, res_type='kaiser_best')
@@ -36,25 +38,3 @@ def transform_audio(audio):
     print('Total time:  %.1f seconds' % (time.time() - start_process_time))
  
     return new_audios
-
-
-
-
-
-    
-
-
-
-
-
-
-    
-    
-
-
-    
-
-
-    
- 
-
