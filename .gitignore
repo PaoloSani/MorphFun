@@ -1,0 +1,8 @@
+venv/
+.venv/
+*.pyc
+__pycache__/
+audio_utilities/__pycache__
+ddsp_functions/__pycache__
+OSC_utilities/__pycache__
+generated_wav/
