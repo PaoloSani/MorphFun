@@ -1,0 +1,9 @@
+pose_estimation: 
+  actions: ['flute', 'violin', 'trumpet', 'saxophone', 'no action']
+  sequence_length: 30
+
+main: 
+  max_duration: 14
+
+files: 
+  model_path: "pose_estimation/fine_tuning.h5"

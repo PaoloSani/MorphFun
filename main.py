@@ -11,7 +11,8 @@ from audio_utilities.handle_record import start_recording, stop_recording, handl
 import numpy as np
 from audio_utilities.play_sd_audio import play_sd_audio
 import multiprocessing as mp
-
+from pose_estimation.pose_estimation_loop import estimate_pose
+from utils import CONFIG_PATH, load_config
 
 
 global connectionIsActive
@@ -48,8 +49,10 @@ async def main():
     global queue 
     init = True
     global stop_threads
-    max_duration = 14
     startRecording = True
+    config = load_config(CONFIG_PATH)
+    max_duration = config['main']['max_duration']
+    model_path = config['files']['model_path']
     morphingOn = True
     morphingQueue = Queue()
     recorded_audio =  np.zeros((RECORDING_SR* max_duration, 1), np.float32)
@@ -68,6 +71,8 @@ async def main():
     messageReader = threading.Thread(target=get_OSC_msg_value, args=(sock,), daemon=True)
     messageReader.start()
 
+    pose_estimation = threading.Thread(target=estimate_pose, args=(model_path), daemon=True)
+
     morphing_process = audio_processing_thread(name = 'Audio Thread', target=audio_function, args=(recorded_audio))
     
     while(connectionIsActive):
@@ -79,7 +84,7 @@ async def main():
         else:
             if ( not queue.empty() ):
                 message = queue.get()
-                print("Message received \"{}\"" .format(messages.get(message)))
+                print(f"Message received \"{messages.get(message)}\"")
                 if (message == 0):
                     if ( morphing_process.is_alive() ):
                         morphing_process.raise_exception()
@@ -97,11 +102,13 @@ async def main():
                         play_sd_audio(recorded_audio)
                         morphingOn = True
                         print("\n!!! M0RPH!NG B3G!N$ !!!\n")
-                        morphing_process.start()   
+                        # morphing_process.start()   
 
                 else:
                     if ( morphingOn ):
                         morphingQueue.put(message)
+                        pose_estimation.start()
+
                         # start_morphing(sounds, loops= 20)
 
     
