@@ -29,6 +29,14 @@ def start_playing_(sounds, loops):
     sounds[0].set_volume(1.0)
     return 
     
+def pause_playing(pg_mixer):
+    pg_mixer.pause()
+
+def unpause_playing(pg_mixer):
+    pg_mixer.unpause()
+
+def stop_playing(pg_mixer):
+    pg_mixer.stop()
 
 def start_morphing(queue):
     config = load_config(CONFIG_PATH)
@@ -46,6 +54,7 @@ def start_morphing(queue):
 
     while True:
         message = queue.get()
+        print(f'morph: {message}')
         if message != -1:
             which_sound = message - 1
             sound_idx_to_activate = which_sound
@@ -54,5 +63,8 @@ def start_morphing(queue):
                     sounds, sound_idx_to_mute, sound_idx_to_activate=sound_idx_to_activate)
         else:
             break  
+    
+    stop_playing(pg_mixer=pygame.mixer)
+
     return 
     

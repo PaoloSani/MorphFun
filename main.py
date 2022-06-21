@@ -78,17 +78,17 @@ async def main():
     messageReader = threading.Thread(target=get_OSC_msg_value, args=(sock,), daemon=True)
     messageReader.start()
 
+    pose_estimation = threading.Thread(target=estimate_pose, args=(model_path, morphingQueue,), daemon=True)
 
-    pose_estimation = threading.Thread(target=estimate_pose, args=(model_path,), daemon=True)
+    morphing_thread = threading.Thread(target=start_morphing, args=(morphingQueue,), daemon=True)  
 
-    morphing_thread = threading.Thread(target=start_morphing, args=(morphingQueue,), daemon=True) # , sounds, loop=20
-    
     while(connectionIsActive):
         if ( init ):
             print("\n")
             print("Ready to record audio!")
             print("\n")   
-            init = False     
+            init = False
+            firstRecording = True     
         else:
             if ( not queue.empty() ):
                 message = queue.get()
@@ -101,6 +101,7 @@ async def main():
                         initMorphing = True
 
                     morphingOn = False
+                    initMorphing = True
                     if ( startRecording ):
                         startRecording = False
                         start_time = start_recording(recorded_audio)
@@ -124,19 +125,18 @@ async def main():
                 else:
                     if ( morphingOn ):
                         if initMorphing:
+                            initMorphing = False
                             morphing_thread.start()
                             pose_estimation.start()
-
-                        morphingQueue.put(message)
 
 
 
 
     
     print("\n\nClosing connection\n\n")
-    if ( morphing_process.is_alive() ):
-        morphing_process.raise_exception()
-        morphing_process.join()
+    if ( morphing_thread.is_alive() ):
+        morphingQueue.put(-1)
+        morphing_thread.join()       
 
     transport.close()
 

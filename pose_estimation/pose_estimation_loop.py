@@ -35,7 +35,7 @@ def quit_estimation(cap):
     cv2.destroyAllWindows()
 
 
-def estimate_pose(model_path):
+def estimate_pose(model_path, queue):
     config = load_config(CONFIG_PATH)
 
     actions = np.array(config['pose_estimation']['actions'])
@@ -66,17 +66,21 @@ def estimate_pose(model_path):
             
             if len(sequence) == sequence_length:
                 res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                prediction_value = res[np.argmax(res)]
-                predicted_action = actions[np.argmax(res)]
+                predicted_index = np.argmax(res)
+                prediction_value = res[predicted_index]
+                predicted_action = actions[predicted_index]
+                print(predicted_action)
 
                 if prediction_value > threshold:
                     print(predicted_action)
-
                     if len(predictions) > 0: 
                             if predicted_action != predictions[-1]:
                                     predictions.append(predicted_action)
+                                    queue.put(predicted_index)
                             else:
                                 predictions.append(predicted_action)
+                                queue.put(predicted_index)
+
                 
         
             # Break gracefully

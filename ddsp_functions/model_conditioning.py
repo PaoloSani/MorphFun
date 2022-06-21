@@ -97,7 +97,7 @@ def model_conditioning(audio_features,  STATISTICS):
 
         # Quantile shift the note_on parts.
         _, loudness_norm = fit_quantile_transform(
-            audio_features['loudness_db'],
+            np.asarray(audio_features['loudness_db']),
             mask_on,
             inv_quantile=STATISTICS['quantile_transform'])
 

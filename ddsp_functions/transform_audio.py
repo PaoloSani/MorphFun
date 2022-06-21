@@ -34,6 +34,7 @@ def transform_audio(audio):
         new_audio = resynthesize(audio_features, model)
         new_audio = librosa.resample(new_audio, sr, target_sr, res_type='kaiser_best')
         new_audios.append(np.asarray(new_audio))
+        del model
    
     print('Total time:  %.1f seconds' % (time.time() - start_process_time))
  
