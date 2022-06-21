@@ -29,7 +29,7 @@ def model_conditioning(audio_features,  STATISTICS):
     loudness_shift = 0  # @param {type:"slider", min:-20, max:20, step:1}
 
 
-    audio_features_mod = {k: v.copy() for k, v in audio_features.items()}
+    audio_features_mod = {k: v for k, v in audio_features.items()}
 
 
     ## Helper functions.

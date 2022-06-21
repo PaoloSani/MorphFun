@@ -7,3 +7,7 @@ main:
 
 files: 
   model_path: "pose_estimation/fine_tuning.h5"
+  audio: 'audio/'
+
+morphing:
+  loops: 20

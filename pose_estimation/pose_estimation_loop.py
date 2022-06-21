@@ -46,7 +46,7 @@ def estimate_pose(model_path):
     predictions = []
     threshold = 0.6
 
-    model = init_model()
+    model = init_model(model_path, sequence_length, actions)
 
     cap = cv2.VideoCapture(0);
     # Set mediapipe model 
