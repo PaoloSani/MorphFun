@@ -1,14 +1,18 @@
 pose_estimation: 
   actions: ['flute', 'violin', 'trumpet', 'saxophone', 'no action']
   sequence_length: 30
-
-main: 
-  max_duration: 14
+  latency_factor: 2 
 
 files: 
-  model_path: "pose_estimation/fine_tuning.h5"
+  model_path: "pose_estimation/conLastDataset.h5"
   audio: 'audio/'
-  img: 'img/'
+  img: 'images/'
+
 
 morphing:
-  loops: 20
+  loops: 1000
+
+controller: 
+  sr: 44100
+  messages: ['Rec', 'Play', 'Pause', 'Clear']
+  max_duration: 14

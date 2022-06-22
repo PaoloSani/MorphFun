@@ -35,56 +35,43 @@ def quit_estimation(cap):
     cv2.destroyAllWindows()
 
 
-def estimate_pose(model_path, queue):
+def estimate_pose(model_path, morphing_queue, data_queue):
     config = load_config(CONFIG_PATH)
 
     actions = np.array(config['pose_estimation']['actions'])
     sequence_length = config['pose_estimation']['sequence_length']
     # 1. New detection variables
     sequence = []
-    sentence = []
     predictions = []
     threshold = 0.6
 
     model = init_model(model_path, sequence_length, actions)
 
-    cap = cv2.VideoCapture(0);
-    # Set mediapipe model 
-    with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
-        while cap.isOpened():
+    sequence = data_queue.get()
+    
+    while sequence != 'start':
+        sequence = data_queue.get()
 
-            # Read feed
-            ret, frame = cap.read()
+    sequence = data_queue.get()
+    print(np.asarray(sequence).shape)
 
-            # Make detections
-            image, results = mediapipe_detection(frame, holistic)
-                        
-            # 2. Prediction logic
-            keypoints = extract_keypoints(results)
-            sequence.append(keypoints)
-            sequence = sequence[-sequence_length:]
-            
-            if len(sequence) == sequence_length:
-                res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                predicted_index = np.argmax(res)
-                prediction_value = res[predicted_index]
-                predicted_action = actions[predicted_index]
-                print(predicted_action)
+    while sequence != -1:
 
-                if prediction_value > threshold:
-                    print(predicted_action)
-                    if len(predictions) > 0: 
-                            if predicted_action != predictions[-1]:
-                                    predictions.append(predicted_action)
-                                    queue.put(predicted_index)
-                            else:
-                                predictions.append(predicted_action)
-                                queue.put(predicted_index)
+        res = model.predict(np.expand_dims(sequence, axis=0))[0]
+        predicted_index = np.argmax(res)
+        prediction_value = res[predicted_index]
+        predicted_action = actions[predicted_index]
 
-                
-        
-            # Break gracefully
-            if cv2.waitKey(10) & 0xFF == ord('q'):
-                quit_estimation(cap)
-                break
-        
+        if prediction_value > threshold:
+            print(predicted_action)
+            if len(predictions) > 0: 
+                    if predicted_action != predictions[-1]:
+                            predictions.append(predicted_action)
+                            morphing_queue.put(predicted_index)
+            else:
+                predictions.append(predicted_action)
+                morphing_queue.put(predicted_index)
+
+        sequence = data_queue.get()
+    return
+                    

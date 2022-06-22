@@ -19,7 +19,7 @@ def transform_audio(audio):
     audio = librosa.resample(audio.ravel(), orig_sr=44100, target_sr=16000, res_type='kaiser_best')
     audio = audio.reshape((1,  np.shape(audio)[0]))
     start_process_time = time.time()
-    model_names = ['Violin', 'Flute', 'Trumpet', 'Tenor_Saxophone']
+    model_names = ['Flute', 'Violin', 'Trumpet', 'Tenor_Saxophone']
 
     #getting all the useful paths for the models 
     models_paths = get_useful_model_paths(model_names)

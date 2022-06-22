@@ -1,17 +1,14 @@
 #imports
 from cProfile import label
-from functools import partial
-from queue import Queue
-import queue
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QLabel, QDialog, QVBoxLayout
+from PyQt5.QtWidgets import QLabel, QDialog, QVBoxLayout
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtGui, QtCore
-import sys
 import cv2
-import threading
 import mediapipe as mp
 import numpy as np
+
+from utils import CONFIG_PATH, load_config
 
 
 #
@@ -36,7 +33,7 @@ def extract_keypoints(results):
 
 #webcam thread
 class Thread(QtCore.QThread):
-    
+
     changePixmap = QtCore.pyqtSignal(QtGui.QImage)
     #initialization
     def __init__(self, data_queue, parent=None):
@@ -50,7 +47,9 @@ class Thread(QtCore.QThread):
         sequence_length = 30
         sequence = []
         cap = cv2.VideoCapture(0)
-        
+        counter = 0
+        config = load_config(CONFIG_PATH)
+        boost = config['pose_estimation']['latency_factor']
        
         # Set mediapipe model 
         with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
@@ -71,7 +70,11 @@ class Thread(QtCore.QThread):
                     sequence = sequence[-sequence_length:]
                     
                     if len(sequence) == sequence_length:
-                       self.queue.put(sequence)
+                        if counter == 29*boost:
+                            self.queue.put(sequence)
+                            counter = 0
+                        else :
+                            counter += 1
 
                     #image show for window
                     rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -143,7 +146,7 @@ class Window(QDialog):
                                         '}'
                                         )   
             self.paused = True
-            self.sendMessageAtClick(cmd_queue, 'Stop')
+            self.sendMessageAtClick(cmd_queue, 'Pause')
 
     #initi function
     def InitWindow(self, cmd_queue, data_queue):
@@ -232,13 +235,4 @@ class Window(QDialog):
         self.show()
         return()
 
-
-
-def useGUI(cmd_queue, data_queue):
-    App = QApplication(sys.argv)
-    
-    window = Window(cmd_queue, data_queue)
-    window
-    sys.exit(App.exec())
-    # App.exec()
 
