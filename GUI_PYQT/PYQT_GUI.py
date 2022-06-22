@@ -98,6 +98,7 @@ class Window(QDialog):
         self.height=720
         self.iconName = "./images/music-notes.ico"
         self.paused = False
+        self.isRecording = False
 
         self.InitWindow(cmd_queue, data_queue)
 
@@ -113,7 +114,7 @@ class Window(QDialog):
         # print(cmd_queue) 
 
     #play pause button
-    def update_button(self, cmd_queue):
+    def play_pause(self, cmd_queue):
         if self.paused:
             self.play_btn.setStyleSheet('QPushButton'
                                         '{'
@@ -143,7 +144,40 @@ class Window(QDialog):
                                         '}'
                                         )   
             self.paused = True
-            self.sendMessageAtClick(cmd_queue, 'Stop')
+            self.sendMessageAtClick(cmd_queue, 'Pause')
+
+    #rec on/off button
+    def recording(self, cmd_queue):
+        if self.isRecording:
+            self.rec_btn.setStyleSheet('QPushButton'
+                                        '{'
+                                        'background-image: url(./images/recbutton.png);'
+                                        'background-repeat: no-repeat;'
+                                        'border: none;'
+                                        
+                                        '}'
+                                        'QPushButton::pressed'
+                                        '{'
+                                        'background-image: url(./images/recbutton_pressed.png);'
+                                        '}'
+                                        )
+            self.isRecording = False
+            self.sendMessageAtClick(cmd_queue, 'Rec')
+        else:   
+            self.rec_btn.setStyleSheet('QPushButton'
+                                        '{'
+                                        'background-image: url(./images/recbutton_on.png);'
+                                        'background-repeat: no-repeat;'
+                                        'border: none;'
+                                        
+                                        '}'
+                                        'QPushButton::pressed'
+                                        '{'
+                                        'background-image: url(./images/recbutton_pressed.png);'
+                                        '}'
+                                        )   
+            self.isRecording = True
+            self.sendMessageAtClick(cmd_queue, 'Rec')
 
     #initi function
     def InitWindow(self, cmd_queue, data_queue):
@@ -189,7 +223,7 @@ class Window(QDialog):
                                    'background-image: url(./images/recbutton_pressed.png);'
                                    '}'
                                    )
-        self.rec_btn.clicked.connect(lambda: self.sendMessageAtClick(cmd_queue, 'Rec'))      
+        self.rec_btn.clicked.connect(lambda: self.recording(cmd_queue))      
 
 
         #button play
@@ -208,7 +242,7 @@ class Window(QDialog):
                                    'background-image: url(./images/playbutton_pressed.png);'
                                    '}'
                                    )
-        self.play_btn.clicked.connect(lambda: self.update_button(cmd_queue))     
+        self.play_btn.clicked.connect(lambda: self.play_pause(cmd_queue))     
        
         #button clear
         self.clear_btn = QtWidgets.QPushButton(self)

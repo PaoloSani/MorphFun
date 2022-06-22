@@ -1,6 +1,6 @@
 from queue import Queue
 import threading
-from PYQT_GUI import useGUI
+from PYQT_GUI  import useGUI
 
 def main():
     command_que = Queue()
