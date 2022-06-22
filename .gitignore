@@ -8,3 +8,4 @@ OSC_utilities/__pycache__
 generated_wav/
 cpac-venv/
 models/
+audio/

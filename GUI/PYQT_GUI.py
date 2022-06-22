@@ -44,7 +44,7 @@ class Thread(QtCore.QThread):
     
     def run(self):
 
-        sequence_length = 30
+        sequence_length = 29
         sequence = []
         cap = cv2.VideoCapture(0)
         counter = 0
