@@ -10,7 +10,7 @@ The core libraries used are:
 
 The entire project is developed in Python and Jupyter Notebook.
 
-### Project Version
+### Project Versions
 [Here](https://github.com/PaoloSani/MorphFun/blob/main/prototype_MORPHUN%20PRESENTATION.pptx), you can find the presentation of the prototype, developed between Python and [Processing](https://processing.org/).
 If you want to take a look at the code see this [branch](https://github.com/PaoloSani/MorphFun/tree/Prototype).
 
