@@ -4,7 +4,7 @@ pose_estimation:
   latency_factor: 2 
 
 files: 
-  model_path: "pose_estimation/conLastDataset.h5"
+  model_path: "pose_estimation/final_model.h5"
   audio: 'audio/'
   img: 'images/'
 
