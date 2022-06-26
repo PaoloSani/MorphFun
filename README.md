@@ -17,4 +17,13 @@ If you want to take a look at the code see this [branch](https://github.com/Paol
 Here, instead in the [main branch](https://github.com/PaoloSani/MorphFun) you can take a look to the final code of the application.
 
 ### Repo Structure
-Apart from the main and the [Prototype](https://github.com/PaoloSani/MorphFun/tree/Prototype) branches, already introduced, this Repo has two more branches: Develop and tkinter-gui
+Apart from the main and the [Prototype](https://github.com/PaoloSani/MorphFun/tree/Prototype) branches, already introduced, this Repo has two more branches: [Develop](https://github.com/PaoloSani/MorphFun/tree/Develop) and [gui-develop](https://github.com/PaoloSani/MorphFun/tree/gui-develop). Both are dedicated to the project development.
+
+### Main branch overview
+
+
+### Contact the authors
+Lorenzo Brugioni
+Armando Boemio
+Gabriele Maucione gabriele.maucione@mail.polimi.it
+Paolo Sani paolo1.sani@mail.polimi.it
