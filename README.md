@@ -23,7 +23,6 @@ Apart from the main and the [Prototype](https://github.com/PaoloSani/MorphFun/tr
 
 
 ### Contact the authors
-| --- | --- |
 | Armando Boemio    | armando.boemio@mail.polimi.it    |
 | Lorenzo Brugioni  | lorenzo.brugioni@mail.polimi.it  |
 | Gabriele Maucione | gabriele.maucione@mail.polimi.it |
