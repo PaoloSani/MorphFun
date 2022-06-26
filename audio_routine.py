@@ -3,7 +3,7 @@ import numpy as np
 import os
 from utils import CONFIG_PATH, load_config
 
-def generate_morphed_audios(audio=None):
+def generate_morphed_audios():
     # recorded_audio = np.load(file_path, allow_pickle=True)
     config = load_config(CONFIG_PATH)
     audio_folder = config['files']['audio']

@@ -19,9 +19,7 @@ def mediapipe_detection(image, model):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # COLOR CONVERSION BGR 2 RGB
     image.flags.writeable = False                  # Image is no longer writeable
     results = model.process(image)                 # Make prediction
-    image.flags.writeable = True                   # Image is now writeable 
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) # COLOR CONVERSION RGB 2 BGR
-    return image, results
+    return results
 
 #
 def extract_keypoints(results):
@@ -61,7 +59,7 @@ class Thread(QtCore.QThread):
                 if ret:
                 
                     # Make detections
-                    image, results = mediapipe_detection(frame, holistic)
+                    results = mediapipe_detection(frame, holistic)
                                 
                     # 2. Prediction logic
                     keypoints = extract_keypoints(results)
@@ -104,6 +102,12 @@ class Window(QDialog):
         self.isRecording = False
 
         self.InitWindow(cmd_queue, data_queue)
+
+    def closeEvent(self, event):
+        # report_session()
+        from pynput.keyboard import Key, Controller
+        mykeyboard = Controller()
+        mykeyboard.press(Key.esc)
 
     #function for webcam implementation
     @QtCore.pyqtSlot(QtGui.QImage)
@@ -269,4 +273,7 @@ class Window(QDialog):
         self.show()
         return()
 
+    def exit_app(self):
+        print("Shortcut pressed") #verification of shortcut press
+        self.close()
 

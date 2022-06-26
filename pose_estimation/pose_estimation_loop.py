@@ -53,10 +53,15 @@ def estimate_pose(model_path, morphing_queue, data_queue):
         sequence = data_queue.get()
 
     sequence = data_queue.get()
-    print(np.asarray(sequence).shape)
 
     while sequence != -1:
-
+        sequence = np.asarray(sequence)
+        if sequence.shape[1] != 30:
+            if sequence.shape[1] > 30:
+                sequence = sequence[:30, :]
+            else:
+                continue
+                
         res = model.predict(np.expand_dims(sequence, axis=0))[0]
         predicted_index = np.argmax(res)
         prediction_value = res[predicted_index]
