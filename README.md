@@ -4,7 +4,7 @@ Playing an instrument is a lot of fun, but what if you could have... MORPHFUN!
 
 MorphFun is a Timbre Transfer application, that relies on a Pose Estimation approach to let the user choose the instrument.
 The core libraries used are:
--[magenta/ddsp](https://github.com/magenta/ddsp) and its [Timbre Transfer](https://colab.research.google.com/github/magenta/ddsp/blob/master/ddsp/colab/demos/timbre_transfer.ipynb) demo module.
+- [magenta/ddsp](https://github.com/magenta/ddsp) and its [Timbre Transfer](https://colab.research.google.com/github/magenta/ddsp/blob/master/ddsp/colab/demos/timbre_transfer.ipynb) demo module.
 - [Mediapipe](https://google.github.io/mediapipe/), for the Pose Estimation part.
 - [PyQT5](https://pypi.org/project/PyQt5/) for the Graphical User Interface.
 
