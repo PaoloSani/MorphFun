@@ -2,10 +2,10 @@ venv/
 .venv/
 *.pyc
 __pycache__/
-audio_utilities/__pycache__
-ddsp_functions/__pycache__
-OSC_utilities/__pycache__
-generated_wav/
+Source/audio_utilities/__pycache__
+Source/ddsp_functions/__pycache__
 cpac-venv/
-models/
-audio/
+Source/models/
+Source/audio/
+Source/GUI/__pycache__
+Source/pose_estimation/__pycache__

@@ -1,0 +1,20 @@
+pose_estimation: 
+  actions: ['flute', 'violin', 'trumpet', 'saxophone', 'no action']
+  sequence_length: 30
+  latency_factor: 2 
+
+files: 
+  model_path: "pose_estimation/final_model.h5"
+  audio: 'audio/'
+  img: 'images/'
+
+
+morphing:
+  loops: 1000
+  model_names: ['Flute', 'Violin', 'Trumpet', 'Tenor_Saxophone']
+
+
+controller: 
+  sr: 44100
+  messages: ['Rec', 'Play', 'Pause', 'Clear']
+  max_duration: 14
