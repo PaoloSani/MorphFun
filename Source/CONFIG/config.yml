@@ -4,9 +4,9 @@ pose_estimation:
   latency_factor: 2 
 
 files: 
-  model_path: "pose_estimation/final_model.h5"
-  audio: 'audio/'
-  img: 'images/'
+  model_path: "Source/pose_estimation/final_model.h5"
+  audio: 'Source/audio/'
+  img: 'Source/images/'
 
 
 morphing:

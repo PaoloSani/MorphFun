@@ -97,7 +97,7 @@ class Window(QDialog):
         self.top=180
         self.width=1280
         self.height=720
-        self.iconName = "./images/music-notes.ico"
+        self.iconName = "./Source/images/music-notes.ico"
         self.paused = False
         self.isRecording = False
 
@@ -125,14 +125,14 @@ class Window(QDialog):
         if self.paused:
             self.play_btn.setStyleSheet('QPushButton'
                                         '{'
-                                        'background-image: url(./images/playbutton.png);'
+                                        'background-image: url(./Source/images/playbutton.png);'
                                         'background-repeat: no-repeat;'
                                         'border: none;'
                                         
                                         '}'
                                         'QPushButton::pressed'
                                         '{'
-                                        'background-image: url(./images/playbutton_pressed.png);'
+                                        'background-image: url(./Source/images/playbutton_pressed.png);'
                                         '}'
                                         )
             self.paused = False
@@ -140,14 +140,14 @@ class Window(QDialog):
         else:   
             self.play_btn.setStyleSheet('QPushButton'
                                         '{'
-                                        'background-image: url(./images/stopbutton.png);'
+                                        'background-image: url(./Source/images/stopbutton.png);'
                                         'background-repeat: no-repeat;'
                                         'border: none;'
                                         
                                         '}'
                                         'QPushButton::pressed'
                                         '{'
-                                        'background-image: url(./images/stopbutton_pressed.png);'
+                                        'background-image: url(./Source/images/stopbutton_pressed.png);'
                                         '}'
                                         )   
             self.paused = True
@@ -158,14 +158,14 @@ class Window(QDialog):
         if self.isRecording:
             self.rec_btn.setStyleSheet('QPushButton'
                                         '{'
-                                        'background-image: url(./images/recbutton.png);'
+                                        'background-image: url(./Source/images/recbutton.png);'
                                         'background-repeat: no-repeat;'
                                         'border: none;'
                                         
                                         '}'
                                         'QPushButton::pressed'
                                         '{'
-                                        'background-image: url(./images/recbutton_pressed.png);'
+                                        'background-image: url(./Source/images/recbutton_pressed.png);'
                                         '}'
                                         )
             self.isRecording = False
@@ -173,14 +173,14 @@ class Window(QDialog):
         else:   
             self.rec_btn.setStyleSheet('QPushButton'
                                         '{'
-                                        'background-image: url(./images/recbutton_on.png);'
+                                        'background-image: url(./Source/images/recbutton_on.png);'
                                         'background-repeat: no-repeat;'
                                         'border: none;'
                                         
                                         '}'
                                         'QPushButton::pressed'
                                         '{'
-                                        'background-image: url(./images/recbutton_pressed.png);'
+                                        'background-image: url(./Source/images/recbutton_pressed.png);'
                                         '}'
                                         )   
             self.isRecording = True
@@ -195,7 +195,7 @@ class Window(QDialog):
         #label containing background image
         vbox = QVBoxLayout()
         labelImage = QLabel(self)
-        pixmap = QPixmap("./images/background.png")
+        pixmap = QPixmap("./Source/images/background.png")
         labelImage.setPixmap(pixmap)
         vbox.addWidget(labelImage)
        
@@ -220,14 +220,14 @@ class Window(QDialog):
         self.rec_btn.setGeometry(93, 577, 123, 100)
         self.rec_btn.setStyleSheet('QPushButton'
                                    '{'
-                                   'background-image: url(./images/recbutton.png);'
+                                   'background-image: url(./Source/images/recbutton.png);'
                                    'background-repeat: no-repeat;'
                                    'border: none;'
                                    
                                    '}'
                                    'QPushButton::pressed'
                                    '{'
-                                   'background-image: url(./images/recbutton_pressed.png);'
+                                   'background-image: url(./Source/images/recbutton_pressed.png);'
                                    '}'
                                    )
         self.rec_btn.clicked.connect(lambda: self.recording(cmd_queue))      
@@ -239,14 +239,14 @@ class Window(QDialog):
         self.play_btn.setGeometry(243, 576, 123, 88)
         self.play_btn.setStyleSheet('QPushButton'
                                    '{'
-                                   'background-image: url(./images/playbutton.png);'
+                                   'background-image: url(./Source/images/playbutton.png);'
                                    'background-repeat: no-repeat;'
                                    'border: none;'
                                    
                                    '}'
                                    'QPushButton::pressed'
                                    '{'
-                                   'background-image: url(./images/playbutton_pressed.png);'
+                                   'background-image: url(./Source/images/playbutton_pressed.png);'
                                    '}'
                                    )
         self.play_btn.clicked.connect(lambda: self.play_pause(cmd_queue))     
@@ -257,14 +257,14 @@ class Window(QDialog):
         self.clear_btn.setGeometry(393, 576, 123, 88)
         self.clear_btn.setStyleSheet('QPushButton'
                                    '{'
-                                   'background-image: url(./images/clearbutton.png);'
+                                   'background-image: url(./Source/images/clearbutton.png);'
                                    'background-repeat: no-repeat;'
                                    'border: none;'
                                    
                                    '}'
                                    'QPushButton::pressed'
                                    '{'
-                                   'background-image: url(./images/clearbutton_pressed.png);'
+                                   'background-image: url(./Source/images/clearbutton_pressed.png);'
                                    '}'
                                    )    
         self.clear_btn.clicked.connect(lambda: self.sendMessageAtClick(cmd_queue, 'Clear'))

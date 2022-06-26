@@ -1,6 +1,6 @@
 import yaml
 
-CONFIG_PATH = "config/config.yml"
+CONFIG_PATH = "Source/config/config.yml"
 
 def load_config(config_name):
     with open(config_name) as file:

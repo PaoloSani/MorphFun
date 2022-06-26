@@ -41,7 +41,7 @@ class MorpherClass:
     def get_useful_model_paths(self):
         model_useful_paths = {}
         for model_name in self.model_names:
-            model_dir_path = os.path.join(os.getcwd(), f'models/{model_name}')
+            model_dir_path = os.path.join(os.getcwd(), f'Source/models/{model_name}')
             model_useful_paths[f'{model_name}'] = {**self.get_model_files_paths(model_dir_path), **{"model_dir" : model_dir_path}}
             
         return model_useful_paths
