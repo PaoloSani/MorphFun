@@ -3,7 +3,7 @@ from pynput import keyboard
 from audio_utilities.handle_record import start_recording, stop_recording, handle_recorded_audio
 import numpy as np
 from audio_utilities.start_morphing import AudioClass
-from ddsp_functions.transform_audio import MorpherClass 
+from ddsp_functions.morpher_module import MorpherClass 
 from pose_estimation.pose_estimation_loop import estimate_pose
 from utils import CONFIG_PATH, load_config
 import os
