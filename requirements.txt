@@ -1,4 +1,10 @@
+python=3.8
+tensorflow
 ddsp
 sounddevice
 tensorflow
 gin
+pynput
+numpy
+pyqt5
+pygame

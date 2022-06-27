@@ -20,7 +20,18 @@ Here, instead in the [main branch](https://github.com/PaoloSani/MorphFun) you ca
 Apart from the main and the [Prototype](https://github.com/PaoloSani/MorphFun/tree/Prototype) branches, already introduced, this Repo has two more branches: [Develop](https://github.com/PaoloSani/MorphFun/tree/Develop) and [gui-develop](https://github.com/PaoloSani/MorphFun/tree/gui-develop). Both are dedicated to the project development.
 
 ### Main branch overview
+The code is in the [Source folder](https://github.com/PaoloSani/MorphFun/tree/main/Source).
+The main modules are:
+- [main.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/main.py), which creates the application, as well as the main thread and data queues.
+- [controller.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/controller.py), which orchestrate the behaviour of all the modules and the interaction between the GUI and the backend.
+- [gui.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/gui.py) contains the structure of the application GUI.
+- [audio_utilities](https://github.com/PaoloSani/MorphFun/tree/main/Source/audio_utilities), which manage the audio acquisition and the reproduction of the morphed audios.
+- [ddsp_functions](https://github.com/PaoloSani/MorphFun/tree/main/Source/ddsp_functions), which contains the functions used to morph the recorded audio with [magenta/ddsp](https://github.com/magenta/ddsp).
+- [pose_estimation](https://github.com/PaoloSani/MorphFun/tree/main/Source/pose_estimation), which contains all the necessary modules for the pose_estimation part.
+- [CONFIG](https://github.com/PaoloSani/MorphFun/tree/main/Source/CONFIG), [images](https://github.com/PaoloSani/MorphFun/tree/main/Source/images) and [utils.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/utils.py) allow to build the application and the pipeline with all the correct configurations.
 
+### Installation
+To test this project, clone the Repo and install the libraries listed in [requirements.txt](https://github.com/PaoloSani/MorphFun/blob/main/requirements.txt) in a virtual environment of your choice.
 
 ### Contact the authors
 | Name              | Contact                          |
