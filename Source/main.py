@@ -7,7 +7,7 @@ from tensorflow.python.ops.numpy_ops import np_config
 np_config.enable_numpy_behavior()
 from PyQt5.QtWidgets import QApplication
 import sys
-from GUI.gui import Window
+from gui import Window
 from controller import controller
 import warnings 
 import tensorflow as tf 
