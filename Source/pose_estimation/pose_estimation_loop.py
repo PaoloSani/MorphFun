@@ -68,7 +68,7 @@ def estimate_pose(model_path, morphing_queue, data_queue):
         predicted_action = actions[predicted_index]
 
         if prediction_value > threshold:
-            print(predicted_action)
+            print(f'Current M0RPH: {predicted_action}')
             if len(predictions) > 0: 
                     if predicted_action != predictions[-1]:
                             predictions.append(predicted_action)
