@@ -122,6 +122,8 @@ class Window(QDialog):
 
     #play pause button
     def play_pause(self, cmd_queue):
+        
+
         if self.paused:
             self.play_btn.setStyleSheet('QPushButton'
                                         '{'
@@ -168,6 +170,19 @@ class Window(QDialog):
                                         'background-image: url(./Source/images/recbutton_pressed.png);'
                                         '}'
                                         )
+            self.play_btn.setStyleSheet('QPushButton'
+                                        '{'
+                                        'background-image: url(./Source/images/playbutton.png);'
+                                        'background-repeat: no-repeat;'
+                                        'border: none;'
+                                        
+                                        '}'
+                                        'QPushButton::pressed'
+                                        '{'
+                                        'background-image: url(./Source/images/playbutton_pressed.png);'
+                                        '}'
+                                        )
+            self.paused = False
             self.isRecording = False
             self.sendMessageAtClick(cmd_queue, 'Rec')
         else:   
