@@ -5,7 +5,6 @@ __pycache__/
 Source/audio_utilities/__pycache__
 Source/ddsp_functions/__pycache__
 cpac-venv/
-Source/models/
 Source/audio/
 Source/GUI/__pycache__
 Source/pose_estimation/__pycache__
