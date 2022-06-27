@@ -28,7 +28,7 @@ The main modules are:
 - [audio_utilities](https://github.com/PaoloSani/MorphFun/tree/main/Source/audio_utilities), which manage the audio acquisition and the reproduction of the morphed audios.
 - [ddsp_functions](https://github.com/PaoloSani/MorphFun/tree/main/Source/ddsp_functions), which contains the functions used to morph the recorded audio with [magenta/ddsp](https://github.com/magenta/ddsp).
 - [pose_estimation](https://github.com/PaoloSani/MorphFun/tree/main/Source/pose_estimation), which contains all the necessary modules for the pose_estimation part.
-- [CONFIG](https://github.com/PaoloSani/MorphFun/tree/main/Source/CONFIG), [images](https://github.com/PaoloSani/MorphFun/tree/main/Source/images) and [utils.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/utils.py) allow to build the application and the pipeline with all the correct configurations.
+- [CONFIG](https://github.com/PaoloSani/MorphFun/tree/main/Source/CONFIG), [images](https://github.com/PaoloSani/MorphFun/tree/main/Source/images), [utils.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/utils.py) and [models](https://github.com/PaoloSani/MorphFun/tree/main/Source/models) allow to build the application and the pipeline with all the correct configurations.
 
 ### Installation
 To test this project, clone the Repo and install the libraries listed in [requirements.txt](https://github.com/PaoloSani/MorphFun/blob/main/requirements.txt) in a virtual environment of your choice.
