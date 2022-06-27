@@ -63,7 +63,6 @@ class AudioClass:
 
         while True:
             message = queue.get()
-            print(f'Morph: {message}')
             if message == 4:
                 continue
             elif message != -1:
