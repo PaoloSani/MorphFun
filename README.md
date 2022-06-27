@@ -30,8 +30,8 @@ The main modules are:
 - [pose_estimation](https://github.com/PaoloSani/MorphFun/tree/main/Source/pose_estimation), which contains all the necessary modules for the pose_estimation part.
 - [CONFIG](https://github.com/PaoloSani/MorphFun/tree/main/Source/CONFIG), [images](https://github.com/PaoloSani/MorphFun/tree/main/Source/images) and [utils.py](https://github.com/PaoloSani/MorphFun/blob/main/Source/utils.py) allow to build the application and the pipeline with all the correct configurations.
 
-### Installation
-To test this project, clone the Repo and install the libraries listed in [requirements.txt](https://github.com/PaoloSani/MorphFun/blob/main/requirements.txt).
+### Installation
+To test this project, clone the Repo and install the libraries listed in [requirements.txt](https://github.com/PaoloSani/MorphFun/blob/main/requirements.txt) in a virtual environment of your choice.
 
 ### Contact the authors
 | Name              | Contact                          |
